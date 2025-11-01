@@ -8,7 +8,83 @@ const questions = [
     question: "What is the capital of France?",
     options: ["London", "Berlin", "Paris", "Madrid"],
     answer: "Paris",
+  
   },
+  {
+    question: "In which city were the first modern Olympic Games held?",
+    options: ["Paris", "Athens", "London", "Rome"],
+    answer: "Athens",
+  },
+  {
+    question: "How often are the Summer Olympic Games held?",
+    options: ["Every 2 years", "Every 4 years", "Every 6 years", "Every year"],
+    answer: "Every 4 years",
+  },
+  {
+    question: "Which colors appear on the Olympic rings?",
+    options: ["Red, Blue, Green, Yellow, Black", "Pink, Orange, White, Grey, Brown", "Red, Green, Purple, Blue, Gold", "Only Gold"],
+    answer: "Red, Blue, Green, Yellow, Black",
+  },
+  {
+    question: "Which city hosted the 2012 Summer Olympics?",
+    options: ["Beijing", "London", "Rio de Janeiro", "Tokyo"],
+    answer: "London",
+  },
+  {
+    question: "What do the five Olympic rings represent?",
+    options: ["Five sports", "Five continents", "Five medals", "Five Olympic cities"],
+    answer: "Five continents",
+  },
+  {
+    question: "Which country has won the most Olympic gold medals?",
+    options: ["China", "Russia", "United States", "Germany"],
+    answer: "United States",
+  },
+  {
+    question: "What metal is used for the first-place Olympic medal?",
+    options: ["Gold", "Silver", "Bronze", "Platinum"],
+    answer: "Gold",
+  },
+  {
+    question: "Where were the 2020 (held in 2021) Summer Olympics hosted?",
+    options: ["Tokyo", "Paris", "Beijing", "Seoul"],
+    answer: "Tokyo",
+  },
+  {
+    question: "Which sport uses a pool and involves swimming, cycling, and running?",
+    options: ["Pentathlon", "Triathlon", "Decathlon", "Biathlon"],
+    answer: "Triathlon",
+  },
+  {
+    question: "Which of these is a Winter Olympic sport?",
+    options: ["Bobsleigh", "Basketball", "Surfing", "Skateboarding"],
+    answer: "Bobsleigh",
+  },
+  {
+    question: "Which city will host the 2028 Summer Olympics?",
+    options: ["Paris", "Los Angeles", "Rome", "Berlin"],
+    answer: "Los Angeles",
+  },
+  {
+    question: "What is the symbol of the Olympic Games called?",
+    options: ["The Olympic Flag", "The Olympic Torch", "The Olympic Rings", "The Olympic Flame"],
+    answer: "The Olympic Rings",
+  },
+  {
+    question: "Who lights the Olympic flame during the opening ceremony?",
+    options: ["A famous athlete", "The president of the host country", "The mayor of the host city", "An audience member"],
+    answer: "A famous athlete",
+  },
+  {
+    question: "Which season does figure skating belong to?",
+    options: ["Summer Olympics", "Winter Olympics", "Autumn Games", "Spring Games"],
+    answer: "Winter Olympics",
+  },
+  {
+    question: "In what year were women first allowed to compete in the Olympic Games?",
+    options: ["1896", "1900", "1920", "1948"],
+    answer: "1900",
+  }
   // ...other questions
 ];
 

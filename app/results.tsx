@@ -9,7 +9,7 @@ interface AnswerItem {
 export default function ResultsScreen() {
   const router = useRouter();
   const { score, answers } = useLocalSearchParams();
-  const totalQuestions = 1;
+  const totalQuestions = 16;
   const percentage = Math.round((Number(score) / totalQuestions) * 100);
   const answerData: AnswerItem[] = JSON.parse(answers as string);
 
