@@ -10,6 +10,9 @@ export default function Index() {
       <Link href="/quiz" style={styles.button}>
         Go to About screen
       </Link>
+      <Link href="/sign-up" style={styles.button}>
+        Sign Up
+      </Link>
       <Button label="Choose a photo" />
       <Button label="Use this photo" />
     </View>
