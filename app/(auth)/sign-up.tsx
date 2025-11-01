@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { Link } from 'expo-router';
+import { Link ,useRouter} from 'expo-router';
 import {supabase} from "./supabase";
+
 
 export default function App() {
   // State variables for email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   // Function to handle sign-up action
   const handleSignUp = async () => {
@@ -30,7 +32,8 @@ export default function App() {
     Alert.alert("Success", "Check your email to confirm your account!");
   }
     // If all is good, show a success message (or handle your API call here)
-    Alert.alert("Success", `Signed up with ${email}`);
+    // Alert.alert("Success", `Signed up with ${email}`);
+    router.replace('/sign-in');
   };
 
 

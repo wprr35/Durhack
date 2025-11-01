@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { supabase } from './supabase';
 
 export default function App() {
   // State variables for email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   // Function to handle login action
   const handleLogin = async () => {
@@ -31,13 +32,13 @@ export default function App() {
     Alert.alert("Error", error.message);
   } else {
     Alert.alert("Success", `Logged in as ${email}`);
-    console.log(data); // session info, user info
-    const userId = data.user.id;
-    console.log('User ID:', userId);
-
+    // console.log(data); // session info, user info
+    // const userId = data.user.id;
+    // console.log('User ID:', userId);
+    router.replace('/')
   }
     // If all is good, show a success message (or handle your API call here)
-    Alert.alert("Success", `Logged in with ${email}`);
+    // Alert.alert("Success", `Logged in with ${email}`);
   };
 
   return (
