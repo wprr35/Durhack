@@ -4,12 +4,13 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-nati
 interface AnswerItem {
   question: string;
   correct: boolean;
+  answer: string;
 }
 
 export default function ResultsScreen() {
   const router = useRouter();
   const { score, answers } = useLocalSearchParams();
-  const totalQuestions = 16;
+  const totalQuestions = 10;
   const percentage = Math.round((Number(score) / totalQuestions) * 100);
   const answerData: AnswerItem[] = JSON.parse(answers as string);
 
@@ -42,7 +43,7 @@ export default function ResultsScreen() {
               Q{index + 1}: {item.question}
             </Text>
             <Text style={styles.answerStatus}>
-              {item.correct ? "✓ Correct" : "✗ Incorrect"}
+              {item.correct ? "✓ Correct" : ("✗ Incorrect \nAnswer: " + item.answer)}
             </Text>
           </View>
         ))}

@@ -1,100 +1,132 @@
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { questionlist } from "../(tabs)/questions"
 
-const questions = [
-  // Array of quiz questions, each with a question, options, and the correct answer
-  {
-    question: "What is the capital of France?",
-    options: ["London", "Berlin", "Paris", "Madrid"],
-    answer: "Paris",
-  
-  },
-  {
-    question: "In which city were the first modern Olympic Games held?",
-    options: ["Paris", "Athens", "London", "Rome"],
-    answer: "Athens",
-  },
-  {
-    question: "How often are the Summer Olympic Games held?",
-    options: ["Every 2 years", "Every 4 years", "Every 6 years", "Every year"],
-    answer: "Every 4 years",
-  },
-  {
-    question: "Which colors appear on the Olympic rings?",
-    options: ["Red, Blue, Green, Yellow, Black", "Pink, Orange, White, Grey, Brown", "Red, Green, Purple, Blue, Gold", "Only Gold"],
-    answer: "Red, Blue, Green, Yellow, Black",
-  },
-  {
-    question: "Which city hosted the 2012 Summer Olympics?",
-    options: ["Beijing", "London", "Rio de Janeiro", "Tokyo"],
-    answer: "London",
-  },
-  {
-    question: "What do the five Olympic rings represent?",
-    options: ["Five sports", "Five continents", "Five medals", "Five Olympic cities"],
-    answer: "Five continents",
-  },
-  {
-    question: "Which country has won the most Olympic gold medals?",
-    options: ["China", "Russia", "United States", "Germany"],
-    answer: "United States",
-  },
-  {
-    question: "What metal is used for the first-place Olympic medal?",
-    options: ["Gold", "Silver", "Bronze", "Platinum"],
-    answer: "Gold",
-  },
-  {
-    question: "Where were the 2020 (held in 2021) Summer Olympics hosted?",
-    options: ["Tokyo", "Paris", "Beijing", "Seoul"],
-    answer: "Tokyo",
-  },
-  {
-    question: "Which sport uses a pool and involves swimming, cycling, and running?",
-    options: ["Pentathlon", "Triathlon", "Decathlon", "Biathlon"],
-    answer: "Triathlon",
-  },
-  {
-    question: "Which of these is a Winter Olympic sport?",
-    options: ["Bobsleigh", "Basketball", "Surfing", "Skateboarding"],
-    answer: "Bobsleigh",
-  },
-  {
-    question: "Which city will host the 2028 Summer Olympics?",
-    options: ["Paris", "Los Angeles", "Rome", "Berlin"],
-    answer: "Los Angeles",
-  },
-  {
-    question: "What is the symbol of the Olympic Games called?",
-    options: ["The Olympic Flag", "The Olympic Torch", "The Olympic Rings", "The Olympic Flame"],
-    answer: "The Olympic Rings",
-  },
-  {
-    question: "Who lights the Olympic flame during the opening ceremony?",
-    options: ["A famous athlete", "The president of the host country", "The mayor of the host city", "An audience member"],
-    answer: "A famous athlete",
-  },
-  {
-    question: "Which season does figure skating belong to?",
-    options: ["Summer Olympics", "Winter Olympics", "Autumn Games", "Spring Games"],
-    answer: "Winter Olympics",
-  },
-  {
-    question: "In what year were women first allowed to compete in the Olympic Games?",
-    options: ["1896", "1900", "1920", "1948"],
-    answer: "1900",
-  }
-  // ...other questions
-];
+
+//let questions: any[] = [];
+let questions = questionlist
+let index = -1
+let quest = -1;
+let answerArray: any[] = []
+let rndNums: any[] = []
+
+
 
 export default function QuizScreen() {
   const router = useRouter(); // Used for navigation between screens
   const [currentQuestion, setCurrentQuestion] = useState(0); // Tracks the current question index
   const [score, setScore] = useState(0); // Tracks the user's score
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null); // Tracks the currently selected answer
-  const [userAnswers, setUserAnswers] = useState<{question: string, correct: boolean}[]>([]); // Stores user's answers and correctness
+  const [userAnswers, setUserAnswers] = useState<{question: string, correct: boolean, answer: string}[]>([]); // Stores user's answers and correctness
 
+const pickedQuestions = useMemo(() => {
+   // Pick 10 random questions at the start
+    //let allNums = [];
+    //let reducedNums = [];
+    //let rndNums = [];
+
+    let pickedIndexes = [];
+
+    /*for(let i = 0; i < questions.length+1; i++){
+      allNums[i] = i; // [0,1,2,3...]
+    }*/
+    //console.log("All nums array: "+allNums);
+    for(let i = 0; i < 10; i++){
+      let rand = Math.floor(Math.random() * questions.length);
+      while (true) { 
+        if (pickedIndexes.includes(rand)) {
+          rand = Math.floor(Math.random() * questions.length); 
+          continue;
+        } else {
+          pickedIndexes.push(rand);
+          break;
+        }
+      }
+
+       // random number between 0 - 99 (Using length of allNums)
+      //console.log("Random number generated: "+rand);
+      //rndNums[i] = rand;
+      //console.log("Random nums array: "+rndNums);
+
+      /*let reducedCount = 0;
+      reducedNums = [];
+      for(let j = 0; j < allNums.length; j++){
+        if(allNums[j] != allNums[rand]){
+          reducedNums[reducedCount] = allNums[j];
+          reducedCount++;
+        }
+      }*/
+      
+
+      //console.log("Reduced nums array: "+reducedNums);
+      //allNums = reducedNums;
+      //console.log("All nums updated: "+allNums);
+    }
+
+    return pickedIndexes;
+  }, []);
+
+    /*
+    let rndOption = [1, 2, 3, 4];
+    let reducedOption = [];
+
+    reducedOption = rndOption;
+    //questions = [questionlist[rndNums[0], rndNums[1], rndNums[2], rndNums[3], rndNums[4], rndNums[5], rndNums[6], rndNums[7], rndNums[8], rndNums[9]]]
+    console.log([questionlist[rndNums[0]], questionlist[rndNums[1]], questionlist[rndNums[2]], questionlist[rndNums[3]], questionlist[rndNums[4]], questionlist[rndNums[5]], questionlist[rndNums[6]], questionlist[rndNums[7]], questionlist[rndNums[8]], questionlist[rndNums[9]]])
+    
+    console.log(rndNums)
+
+    let passNum = 0;
+    for(let i = 4; i > 0; i--){
+      let rand = Math.floor(Math.random() * i);
+        //console.log(rand);
+
+        let chosenOption = reducedOption[rand];
+
+        if(passNum == 0){
+            console.log("A. "+questions[rndNums[index]].options[chosenOption - 1]);
+        }
+        else if(passNum == 1){
+            console.log("B. "+questions[rndNums[index]].options[chosenOption - 1]);
+        }
+        else if(passNum == 2){
+            console.log("C. "+questions[rndNums[index]].options[chosenOption - 1]);
+        }
+        else if(passNum == 3){
+            console.log("D. "+questions[rndNums[index]].options[chosenOption - 1]);
+        }
+
+        passNum++;
+
+        rndOption[rand] = -1
+        let reducedCount = 0;
+        for (let j = 0; j < rndOption.length; j++){
+            if(rndOption[j] != -1){
+                reducedOption[reducedCount] = rndOption[j];
+                reducedCount++;
+                //console.log(reducedOption);
+            }
+        }
+      }
+      console.log(questions[rndNums[index]].options)
+    //console.log("All random nums: "+rndNums);
+    return rndNums;
+  }, []);*/
+
+  useEffect(() => {
+  rndArrangement(); // Randomise answer order for each question
+  }, [currentQuestion]);
+
+  //randomly rearranges the answers
+  const rndArrangement = () => {
+
+    
+  }
+
+  //creates an array of 10 random questions
+
+  
   const handleSelect = (answer: string) => {
     // Called when a user selects an answer
     setSelectedAnswer(answer);
@@ -102,12 +134,13 @@ export default function QuizScreen() {
 
   const handleSubmit = () => {
     // Checks if the selected answer is correct
-    const isCorrect = selectedAnswer === questions[currentQuestion].answer;
+    const isCorrect = selectedAnswer === questions[pickedQuestions[currentQuestion]].answer;
 
     // Save the current answer result
     setUserAnswers([...userAnswers, {
-      question: questions[currentQuestion].question,
-      correct: isCorrect
+      question: questions[pickedQuestions[currentQuestion]].question,
+      correct: isCorrect,
+      answer: questions[pickedQuestions[currentQuestion]].answer
     }]);
 
     // Update score if answer is correct
@@ -118,7 +151,7 @@ export default function QuizScreen() {
     // Reset selected answer for the next question
     setSelectedAnswer(null);
 
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < 9) {
       // Move to the next question
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -128,8 +161,9 @@ export default function QuizScreen() {
         params: { 
           score: isCorrect ? score + 1 : score,
           answers: JSON.stringify(userAnswers.concat([{
-            question: questions[currentQuestion].question,
-            correct: isCorrect
+            question: questions[pickedQuestions[currentQuestion]].question,
+            correct: isCorrect,
+            answer: questions[pickedQuestions[currentQuestion]].answer
           }]))
         },
       });
@@ -140,15 +174,16 @@ export default function QuizScreen() {
     <View style={styles.container}>
       <Text style={styles.questionCount}>
         {/* Displays current question number out of total */}
-        Question {currentQuestion + 1}/{questions.length}
+        Question {currentQuestion + 1}/{10}
       </Text>
       <Text style={styles.question}>
         {/* Displays the current question */}
-        {questions[currentQuestion].question}
+        {questions[pickedQuestions[currentQuestion]].question}
       </Text>
 
       {/* Renders answer options as buttons */}
-      {questions[currentQuestion].options.map((option, index) => (
+      
+      {questions[pickedQuestions[currentQuestion]].options.map((option, index) => (
         <TouchableOpacity
           key={index}
           style={[
@@ -171,7 +206,7 @@ export default function QuizScreen() {
         disabled={!selectedAnswer}
       >
         <Text style={styles.submitButtonText}>
-          {currentQuestion < questions.length - 1 ? "Submit & Next" : "Submit & Finish"}
+          {currentQuestion < 9 ? "Submit & Next" : "Submit & Finish"}
         </Text>
       </TouchableOpacity>
     </View>
