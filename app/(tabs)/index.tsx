@@ -1,18 +1,21 @@
 import Button from '@/components/Button';
 import { Link,useRouter } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { supabase } from '../(auth)/supabase';
 import useSession from '../(auth)/checkSession';
-
 
 export default function Index() {
   const session = useSession();
   const router = useRouter();
+  const d = Dimensions.get("window")
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home screen</Text>
-      <Link href="/quiz" style={styles.button}>
-        Go to About screen
+  
+      <Link href="/history" style={styles.button}>
+        Olympic Legacy
+      </Link>
+      <Link href="/countryhistory" style={styles.button}>
+        Country History
       </Link>
       {session ? (
         <Text
@@ -29,8 +32,6 @@ export default function Index() {
           Sign Up
         </Link>
       )}
-      <Button label="Choose a photo" />
-      <Button label="Use this photo" />
     </View>
   );
 }
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textDecorationLine: 'underline',
     color: '#fff',
+    padding: 15
   },
   footerContainer: {
     flex: 1 / 3,
