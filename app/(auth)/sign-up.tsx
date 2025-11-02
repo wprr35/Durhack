@@ -8,27 +8,40 @@ export default function App() {
   // State variables for email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const router = useRouter();
 
   // Function to handle sign-up action
   const handleSignUp = async () => {
-    if (!email || !password) {
+    if (!email || !password || !username) {
       Alert.alert("Error", "Please fill in all fields.");
       return;
     }
 
     // Basic email validation
-    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-    if (!emailRegex.test(email)) {
-      Alert.alert("Error", "Please enter a valid email address.");
-      return;
-    }
+    // const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    // if (!emailRegex.test(email)) {
+    //   Alert.alert("Error", "Please enter a valid email address.");
+    //   return;
+    // }
 
     const { data, error } = await supabase.auth.signUp({ email, password });
 
   if (error) {
     Alert.alert("Error", error.message);
   } else {
+
+    if (data?.user) {
+    // Create a matching profile row
+    const { error: insertError } = await supabase
+      .from('profiles')
+      .insert([{ id: data.user.id, username: username }]); // replace with your username input
+
+    if (insertError) {
+      Alert.alert('Error', insertError.message);
+      return;
+      }
+    }
     Alert.alert("Success", "Check your email to confirm your account!");
   }
     // If all is good, show a success message (or handle your API call here)
@@ -46,6 +59,7 @@ export default function App() {
         style={styles.input}
         placeholder="Email"
         keyboardType="email-address"
+        placeholderTextColor="black"
         value={email}
         onChangeText={setEmail}
       />
@@ -55,8 +69,18 @@ export default function App() {
         style={styles.input}
         placeholder="Password"
         secureTextEntry
+        placeholderTextColor="black"
         value={password}
         onChangeText={setPassword}
+      />
+
+      {/* Username Input */}
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+        placeholderTextColor="black"
+        onChangeText={setUsername}
       />
 
       {/* Sign Up Button */}
@@ -93,6 +117,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingHorizontal: 10,
     borderRadius: 5,
+    color: 'black',
   },
   footer: {
     marginTop: 20,

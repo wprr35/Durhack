@@ -17,11 +17,11 @@ export default function App() {
     }
 
     // Basic email validation
-    const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-    if (!emailRegex.test(email)) {
-      Alert.alert("Error", "Please enter a valid email address.");
-      return;
-    }
+    // const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    // if (!emailRegex.test(email)) {
+    //   Alert.alert("Error", "Please enter a valid email address.");
+    //   return;
+    // }
 
     const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -51,6 +51,7 @@ export default function App() {
         placeholder="Email"
         keyboardType="email-address"
         value={email}
+        placeholderTextColor="black"
         onChangeText={setEmail}
       />
 
@@ -60,6 +61,7 @@ export default function App() {
         placeholder="Password"
         secureTextEntry
         value={password}
+        placeholderTextColor="black"
         onChangeText={setPassword}
       />
 
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingHorizontal: 10,
     borderRadius: 5,
+    color: 'black',
   },
   footer: {
     marginTop: 20,
